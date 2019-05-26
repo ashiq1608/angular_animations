@@ -7,8 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   courseGoals = [
-    { title: 'Master Angular Styles', isActiveGoal: true},
-    { title: 'Learn Angular Animations', isActiveGoal: false},
-    { title: 'Master Angular Animations', isActiveGoal: false},
-  ]
+    { title: 'Master Angular Styles', isActiveGoal: true },
+    { title: 'Learn Angular Animations', isActiveGoal: false },
+    { title: 'Master Angular Animations', isActiveGoal: false }
+  ];
+  public divClicked: boolean;
 }

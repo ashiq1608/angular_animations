@@ -1,0 +1,83 @@
+1. View Encapsulation: to exclude shadow dom which is created by angular itself.. Eg: [_ngContent-c2].
+currently viewEncapsulation is supported by chrome 53 or higher & safari 10.0. 
+
+2. app-quote {
+width: 50%; } which is applicable only on global style sheets & not local component specific css.
+
+// CSS Selectors
+
+3. :host { }, :host(.classname) { }
+
+4. :host { }, :host(.classname) /deep/ {} or :host { }, :host(.classname) >>> {} - gives style for its all child components elements..
+
+// [ngClass]
+5. [ngClass]="{ favorite: isFavorite }" or [ngClass]="{active: goal.isActiveGoal}"
+    inside forloop - [ngClass] = {marked : markedprojectIndex === i, inactive : project.status === 'active'}
+    for long definition - [ngClass] = {getProjectdetails()}
+    -> ts:
+    getProjectdetails() {
+      return {
+        'label-success': this.project.status === 'active',
+        'label-default': this.project.status === 'invalid',
+        'label-danger': this.project.status === 'critical',
+      }
+    }
+
+// [ngStyle]
+6. [ngStyle]="{ width: isFavorite ? '600px' : '400px' }",
+    <div (click)="divClicked = true"
+    [ngStyle]="{backgroundColor: divClicked ? 'Red' : 'Blue' }">
+    </div>
+
+// Angular Renderer2
+7. -> Html: 
+      <button class="btn btn-primary" (click)="onShowBoring(showBoring)">
+        Show boring quotes..
+      </button>
+      <div class="boring" style="display: none" #showBoring>
+        <div id="verBoring">
+          <app-quote></app-quote>
+        </div>
+      </div>
+  -> ts:
+  import { Renderer2 } from '@angular/core';
+  constructor(private renderer: Renderer2) {}
+  onShowBoring(element: HTMLElement) {
+    this.renderer.setStyle(element, 'display', 'block');
+  }
+
+8. // Transition: 
+Basically, the job of timing functions (e.g. ease-out) is to define the speed curve of an animation. Of course you set a duration but an object may move from A to B in 3 seconds with different speeds:
+
+ease-out (start fast, end slow): A -------- 2s -- 3s B
+
+ease-in (start slow, end fast): A -- 1s -------- 3s B
+
+linear (constant speed): A ---------- 3s B
+
+eg: transition: width 1s ease-in 0.2s;
+
+9. // Animation: 
+eg: .divName {
+  animation: moved 4s ease-out forwards;
+}
+
+/* CSS Animations */
+@keyframes moved {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(300px) scale(1.2);
+  }
+  75% {
+    transform: translateX(400px) scale(1);
+    opacity: 1.2;
+  }
+  100% {
+    transform: translateX(400px) scale(1);
+    opacity: 0.1;
+  }
+}
+  

@@ -7,7 +7,17 @@
   <div class="row">
     <div class="col-xs-12">
       <h1>Application Wide Styling</h1>
+      <hr />
       <app-quote></app-quote>
+      <hr />
+      <div
+        id="div1"
+        (click)="divClicked = true"
+        [ngStyle]="{ backgroundColor: divClicked ? 'Red' : 'Blue' }"
+        [ngClass]="{ marked: divClicked }"
+      ></div>
+      <hr />
+      <div id="div2" (click)="doAnimate = true" [ngClass]="{ animate: doAnimate }"></div>
     </div>
   </div>
 </div>
